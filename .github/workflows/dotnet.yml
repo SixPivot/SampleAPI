@@ -26,6 +26,6 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o dotnetcorewebapp
     - name: Publish Artifacts
-      run: actions/upload-artifacts@v2
+      uses: actions/upload-artifacts@v2
       with:
         path: ${GITHUB_WORKSPACE}
