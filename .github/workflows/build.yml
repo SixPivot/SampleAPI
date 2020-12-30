@@ -60,3 +60,35 @@ jobs:
         name: dotnetcorewebapp
     - name: Display structure of downloaded files
       run: ls -R
+
+  deploy_to_TEST:
+    name: Deploy TEST
+    runs-on: ubuntu-latest
+    environment:
+      name: TEST
+
+    needs: [build]
+
+    steps:
+    - name: download sampleapi
+      uses: actions/download-artifact@v2
+      with:
+        name: dotnetcorewebapp
+    - name: Display structure of downloaded files
+      run: ls -R
+
+  deploy_to_PROD:
+    name: Deploy PROD
+    runs-on: ubuntu-latest
+    environment:
+      name: PROD
+
+    needs: [build]
+
+    steps:
+    - name: download sampleapi
+      uses: actions/download-artifact@v2
+      with:
+        name: dotnetcorewebapp
+    - name: Display structure of downloaded files
+      run: ls -R
