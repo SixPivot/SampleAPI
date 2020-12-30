@@ -38,9 +38,10 @@ jobs:
       uses: thedoctor0/zip-release@master
       with: 
         filename: dotnetcorewebapp.zip
+        path: ${{ github.workspace }}
         directory: 'dotnetcorewebapp' 
     - name: Publish Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: dotnetcorewebapp
-        path: ./dotnetcorewebapp.zip
+        path: ${{ github.workspace }}/dotnetcorewebapp.zip
