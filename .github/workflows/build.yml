@@ -1,4 +1,4 @@
-name: sampleapi
+name: sampleapi_ci
 
 on:
   push:
