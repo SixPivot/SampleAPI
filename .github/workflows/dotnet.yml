@@ -24,8 +24,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish -c Release -o dotnetcorewebapp
+      run: dotnet publish --no-build -c Release -o dotnetcorewebapp -p:PublishSingleFile=true
     - name: Publish Artifacts
-      uses: actions/upload-artifacts@v2
+      uses: actions/upload-artifact@v2
       with:
         path: ${GITHUB_WORKSPACE}
