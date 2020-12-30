@@ -24,8 +24,11 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish --no-build -c Release -o dotnetcorewebapp -p:PublishSingleFile=true
+      run: dotnet publish --no-build -c Release -o dotnetcorewebapp 
+    - name: Compress
+      run: compress-archive -path 'dotnetcorewebapp' -destinationpath 'dotnetcorewebapp.zip'
     - name: Publish Artifacts
       uses: actions/upload-artifact@v2
       with:
-        path: ${{ github.workspace }}
+        name: dotnetcorewebapp
+        path: ./dotnetcorewebapp.zip
