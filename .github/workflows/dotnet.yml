@@ -1,4 +1,4 @@
-name: .NET
+name: $(Build.DefinitionName)_1.0.$(year:yy)$(DayOfYear)$(Rev:.r)
 
 on:
   push:
@@ -28,4 +28,4 @@ jobs:
     - name: Publish Artifacts
       uses: actions/upload-artifact@v2
       with:
-        path: ${GITHUB_WORKSPACE}
+        path: ${{ github.workspace }}
