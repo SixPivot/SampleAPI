@@ -67,7 +67,7 @@ jobs:
     environment:
       name: TEST
 
-    needs: [build]
+    needs: [build,deploy_to_DEV]
 
     steps:
     - name: download sampleapi
@@ -83,7 +83,7 @@ jobs:
     environment:
       name: PROD
 
-    needs: [build]
+    needs: [build,deploy_to_TEST]
 
     steps:
     - name: download sampleapi
