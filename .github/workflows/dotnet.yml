@@ -1,4 +1,4 @@
-name: $(Build.DefinitionName)_1.0.$(year:yy)$(DayOfYear)$(Rev:.r)
+name: ${{ github.workflow }}_${{ github.run_number }}
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
     - name: Install Swagger DLLs
       run: dotnet tool install --version 5.6.2 Swashbuckle.AspNetCore.Cli
     - name: Swagger 
-      run: dotnet swagger tofile --output swagger.json SampleAPI\bin\Release\netcoreapp3.1\SampleAPI.dll v1
+      run: dotnet swagger tofile --output swagger.json SampleAPI/bin/Release/netcoreapp3.1/SampleAPI.dll v1
     - name: Run Spectral
       uses: stoplightio/spectral-action@v0.5.5
       with:
