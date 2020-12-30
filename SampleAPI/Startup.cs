@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -30,6 +31,7 @@ namespace SampleAPI
 
             services.AddSwaggerGen(c =>
             {
+                c.AddServer(new OpenApiServer { Url = "http://localhost" });
                 c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {

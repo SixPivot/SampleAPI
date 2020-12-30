@@ -26,6 +26,7 @@ namespace SampleAPI.Controllers
         [HttpGet()]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerOperation(
+            OperationId = "GetSamples",
             Summary = "Get all samples",
             Description = "returns all samples"
         )]
@@ -49,6 +50,7 @@ namespace SampleAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
+            OperationId = "GetSample",
             Summary = "Get specific sample",
             Description = "return a sample"
         )]
@@ -74,6 +76,7 @@ namespace SampleAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
+            OperationId = "PostSample",
             Summary = "Create a sample",
             Description = "Create a new Sample"
         )]
@@ -98,6 +101,7 @@ namespace SampleAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
+            OperationId = "PutSample",
             Summary = "Update a sample",
             Description = "Update an existing Sample"
         )]
@@ -121,6 +125,7 @@ namespace SampleAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
+            OperationId = "DeleteSample",
             Summary = "Delete a sample",
             Description = "Delete an existing Sample"
         )]
