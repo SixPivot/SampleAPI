@@ -1,4 +1,4 @@
-name: ${{ github.workflow }}_${{ github.run_number }}
+name: sampleapi
 
 on:
   push:
