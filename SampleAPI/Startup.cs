@@ -31,7 +31,7 @@ namespace SampleAPI
 
             services.AddSwaggerGen(c =>
             {
-                c.AddServer(new OpenApiServer { Url = "http://localhost" });
+                //c.AddServer(new OpenApiServer { Url = "http://localhost" });
                 c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
