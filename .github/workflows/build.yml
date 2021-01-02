@@ -60,6 +60,13 @@ jobs:
         name: dotnetcorewebapp
     - name: Display structure of downloaded files
       run: ls -R
+      # Deploy to Azure Web apps
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: SampleAPI-bc01 
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
+        package: './dotnetcorewebapp/dotnetcorewebapp.zip'
 
   deploy_to_TEST:
     name: Deploy TEST
