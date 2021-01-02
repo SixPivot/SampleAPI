@@ -60,42 +60,25 @@ jobs:
         name: dotnetcorewebapp
     - name: Display structure of downloaded files
       run: ls -R
-      # Deploy to Azure Web apps
+      # Deploy to Azure Web apps (not using slots)
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v2
       with: 
         app-name: SampleAPI-bc01 
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
         package: './dotnetcorewebapp/dotnetcorewebapp.zip'
-
-  deploy_to_TEST:
-    name: Deploy TEST
-    runs-on: ubuntu-latest
-    environment:
-      name: TEST
-
-    needs: [build,deploy_to_DEV]
-
-    steps:
-    - name: download sampleapi
-      uses: actions/download-artifact@v2
+    # az ad sp create-for-rbac --name "github-AzureSponsorship-3e2bea16-63ed-4349-9b9c-fe2f91f8e3d4" --sdk-auth --role contributor --scopes /subscriptions/3e2bea16-63ed-4349-9b9c-fe2f91f8e3d4
+    - name: Login via Az module
+      uses: azure/login@v1
       with:
-        name: dotnetcorewebapp
-    - name: Display structure of downloaded files
-      run: ls -R
-
-  deploy_to_PROD:
-    name: Deploy PROD
-    runs-on: ubuntu-latest
-    environment:
-      name: PROD
-
-    needs: [build,deploy_to_TEST]
-
-    steps:
-    - name: download sampleapi
-      uses: actions/download-artifact@v2
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+        enable-AzPSSession: true 
+    # APIM - Create the Versioned API before running the deployment    
+    - name: Run Azure PowerShell script
+      uses: azure/powershell@v1
       with:
-        name: dotnetcorewebapp
-    - name: Display structure of downloaded files
-      run: ls -R
+        inlineScript: |
+          $newRevision= ${{ GITHUB_RUN_NUMBER }}
+          $revision = New-AzApiManagementApiRevision -Context $ApiMgmtContext -ApiId "demo-api" -ApiRevision "$newRevision" -SourceApiRevision $apiSpecification.ApiRevision  -ServiceUrl https://samplebc.azurewebsites.net
+          Import-AzApiManagementApi -Context $ApiMgmtContext -SpecificationFormat OpenApi -SpecificationUrl https://sampleapi-bc01.azurewebsites.net/swagger/v1/swagger.json -ApiId "sample-api" -ApiRevision $revision.APIRevision -Path sampleapi -ServiceUrl https://sampleapi-bc01.azurewebsites.net
+        azPSVersion: '3.1.0'
