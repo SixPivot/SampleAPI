@@ -80,6 +80,6 @@ jobs:
         inlineScript: |
           $ApiMgmtContext = New-AzApiManagementContext -ResourceGroupName "Samples" -ServiceName "samplebc"
           $newRevision= ${{ github.run_number }}
-          $revision = New-AzApiManagementApiRevision -Context $ApiMgmtContext -ApiId "demo-api" -ApiRevision "$newRevision" -SourceApiRevision $apiSpecification.ApiRevision  -ServiceUrl https://samplebc.azurewebsites.net
+          $revision = New-AzApiManagementApiRevision -Context $ApiMgmtContext -ApiId "sample-api" -ApiRevision "$newRevision" -ServiceUrl https://samplebc.azurewebsites.net
           Import-AzApiManagementApi -Context $ApiMgmtContext -SpecificationFormat OpenApi -SpecificationUrl https://sampleapi-bc01.azurewebsites.net/swagger/v1/swagger.json -ApiId "sample-api" -ApiRevision $revision.APIRevision -Path sampleapi -ServiceUrl https://sampleapi-bc01.azurewebsites.net
         azPSVersion: '3.1.0'
