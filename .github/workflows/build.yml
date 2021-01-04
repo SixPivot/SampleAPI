@@ -121,7 +121,7 @@ jobs:
           $newRevision = ${{ github.run_number }}
           $newApiManagementApiReleaseParams = @{
             Context = $ApiMgmtContext 
-            ApiId = "demo-api"
+            ApiId = "sample-api"
             ApiRevision = $newRevision 
           }
           New-AzApiManagementApiRelease @newApiManagementApiReleaseParams        
